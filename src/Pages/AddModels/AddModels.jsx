@@ -1,6 +1,7 @@
 import { use } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
+
 
 const AddModal = () => {
   const { user } = use(AuthContext);
@@ -28,7 +29,7 @@ const AddModal = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        navigate('/all-models')
+        navigate("/all-models");
         console.log(data);
       })
       .catch((err) => {

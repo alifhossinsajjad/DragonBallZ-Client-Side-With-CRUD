@@ -49,7 +49,7 @@ const Register = () => {
         <h1 className="text-3xl font-bold text-center">Register</h1>
         <form onSubmit={handleRegister}>
           <fieldset className="fieldset">
-            {/* email field */}
+            {/* name field */}
             <label className="label">Name</label>
             <input
               type="text"
