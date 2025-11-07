@@ -1,6 +1,6 @@
-import React, { use, useEffect, useState } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+import { use, useEffect, useState } from "react";
 import { ModelCard } from "../../Components/ModelCard";
+import { AuthContext } from "../../Context/AuthContext";
 
 const MyModels = () => {
   const { user } = use(AuthContext);
@@ -8,11 +8,14 @@ const MyModels = () => {
   const [models, setModels] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(`http://localhost:3000/my-models?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    }).then((res) => {
+    fetch(
+      `https://dragon-ball-server.vercel.app/my-models?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    ).then((res) => {
       res.json().then((data) => {
         console.log(data);
         setModels(data);

@@ -1,18 +1,18 @@
 import { use, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthContext";
-import toast from "react-hot-toast";
 
 const ModelDetails = () => {
   const { user } = use(AuthContext);
   const [model, setModel] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const [update, setUpdate] = useState(false)
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/models/${id}`, {
+    fetch(`https://dragon-ball-server.vercel.app/models/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -26,7 +26,7 @@ const ModelDetails = () => {
       .catch((error) => {
         console.log(error, "data are not fetch");
       });
-  }, [user,id,update]);
+  }, [user, id, update]);
 
   const naviagte = useNavigate();
 
@@ -42,7 +42,7 @@ const ModelDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/models/${model._id}`, {
+        fetch(`https://dragon-ball-server.vercel.app/models/${model._id}`, {
           method: "DELETE",
           body: JSON.stringify(result),
         })
@@ -64,24 +64,20 @@ const ModelDetails = () => {
   };
 
   const handleDownload = () => {
-
-
-
     const finalModel = {
-      name : model.name,
-      downloads : model.downloads,
-      created_by : model.created_by,
-      description : model.description,
+      name: model.name,
+      downloads: model.downloads,
+      created_by: model.created_by,
+      description: model.description,
       thumbnail: model.thumbnail,
-      created_at : new Date(),
-      downloaded_by : user.email,
-    }
+      created_at: new Date(),
+      downloaded_by: user.email,
+    };
 
-    
-    fetch(`http://localhost:3000/my-downloads/${model._id}`, {
+    fetch(`https://dragon-ball-server.vercel.app/my-downloads/${model._id}`, {
       method: "POST",
       headers: {
-        "content-type": "application/json", 
+        "content-type": "application/json",
       },
       body: JSON.stringify(finalModel),
     })
@@ -89,8 +85,8 @@ const ModelDetails = () => {
       .then((data) => {
         console.log(data);
         // naviagte("/all-models");
-        toast.success('Your model download successfully')
-        setUpdate(!update)
+        toast.success("Your model download successfully");
+        setUpdate(!update);
       })
       .catch((error) => {
         console.log(error);
@@ -119,14 +115,14 @@ const ModelDetails = () => {
             </h1>
 
             <div className="flex justify-between">
-              <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">{model.category}</div>
+              <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
+                {model.category}
+              </div>
 
-
-
-            <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">Download : {model.downloads}</div>
+              <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
+                Download : {model.downloads}
+              </div>
             </div>
-
-
 
             <div className="text-xs text-secondary">{model.created_by}</div>
 
@@ -141,7 +137,10 @@ const ModelDetails = () => {
               >
                 Update Model
               </Link>
-              <button onClick={handleDownload} className="btn btn-secondary rounded-full ">
+              <button
+                onClick={handleDownload}
+                className="btn btn-secondary rounded-full "
+              >
                 Download
               </button>
               <button

@@ -6,11 +6,11 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Registration";
 import Home from "../Pages/Home/Home";
 import ModelDetails from "../Pages/ModelDetails/ModelDetails";
+import MyDownloads from "../Pages/MyDownloads/MyDownloads";
+import MyModels from "../Pages/MyModels/MyModels";
 import Profile from "../Pages/Profile/Profile";
 import UpdateModel from "../Pages/UpdateModel/UpdateModel";
 import PrivetRoutes from "./PrivetRoutes";
-import MyModels from "../Pages/MyModels/MyModels";
-import MyDownloads from "../Pages/MyDownloads/MyDownloads";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,12 +19,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         Component: Home,
-        loader: () => fetch("http://localhost:3000/models"),
+        loader: () => fetch("https://dragon-ball-server.vercel.app/models"),
       },
       {
         path: "/all-models",
         Component: AllModel,
-        loader: () => fetch("http://localhost:3000/models"),
+        loader: () => fetch("https://dragon-ball-server.vercel.app/models"),
       },
       {
         path: "/model-details/:id",
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         path: "/my-downloads",
         element: (
           <PrivetRoutes>
-            <MyDownloads/>
+            <MyDownloads />
           </PrivetRoutes>
         ),
       },
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
           </PrivetRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/models/${params.id}`),
+          fetch(`https://dragon-ball-server.vercel.app/models/${params.id}`),
       },
 
       {
