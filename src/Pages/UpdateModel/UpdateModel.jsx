@@ -15,7 +15,7 @@ const UpdateModel = () => {
       thumbnail: e.target.thumbnail.value,
     };
 
-    fetch(`http://localhost:3000/models/${data._id}`, {
+    fetch(`https://dragon-ball-server.vercel.app/models/${data._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
