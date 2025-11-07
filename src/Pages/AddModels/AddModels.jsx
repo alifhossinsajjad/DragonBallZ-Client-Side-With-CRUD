@@ -2,7 +2,6 @@ import { use } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 
-
 const AddModal = () => {
   const { user } = use(AuthContext);
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const AddModal = () => {
       created_by: user.email,
     };
 
-    fetch("http://localhost:3000/models", {
+    fetch("https://dragon-ball-server.vercel.app/models", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

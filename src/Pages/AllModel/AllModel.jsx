@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLoaderData } from "react-router";
 import { ModelCard } from "../../Components/ModelCard";
 
@@ -9,24 +9,20 @@ const AllModel = () => {
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
   const handdleSearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
     setLoading(true);
     console.log(search);
-    fetch(`http://localhost:3000/search?search=${search}`)
+    fetch(`https://dragon-ball-server.vercel.app/search?search=${search}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
 
         setSearchData(data);
         setLoading(false);
-        
       });
   };
-
-
 
   return (
     <div className="mt-25">
@@ -57,7 +53,9 @@ const AllModel = () => {
             </svg>
             <input name="search" type="search" placeholder="Search" />
           </label>
-          <button className="btn btn-secondary rounded-full">{loading ? 'searching...':'search'}</button>
+          <button className="btn btn-secondary rounded-full">
+            {loading ? "searching..." : "search"}
+          </button>
         </form>
       </div>
       <div className="max-w-7xl mx-auto">
