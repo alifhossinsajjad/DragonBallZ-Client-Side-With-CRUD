@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
 import { ModelCard } from "../../Components/ModelCard";
@@ -7,14 +7,16 @@ const MyDownloads = () => {
   const { user } = use(AuthContext);
   const [model, setModels] = useState([]);
   const [loading, setLoading] = useState(true);
- 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-downloads?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    }).then((res) => {
+    fetch(
+      `https://dragon-ball-server.vercel.app/my-downloads?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    ).then((res) => {
       res.json().then((data) => {
         console.log(data);
         setModels(data);
@@ -24,8 +26,8 @@ const MyDownloads = () => {
     });
   }, [user]);
 
-  if(loading) {
-    return <div>Loading......</div>
+  if (loading) {
+    return <div>Loading......</div>;
   }
 
   return (
